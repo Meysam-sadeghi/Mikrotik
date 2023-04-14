@@ -1,0 +1,8 @@
+:local cpuUsage [/system resource get cpu-load]
+
+:if ($cpuUsage > 50) do={
+   :local emailSubject "CPU Usage Alert!"
+   :local emailBody ("The CPU usage is currently at " . $cpuUsage . "%. Please check the server immediately.")
+
+   /tool e-mail send to="youremail@example.com" subject=$emailSubject body=$emailBody
+}
