@@ -1,3 +1,10 @@
+#  This script is designed to monitor the CPU usage of a MikroTik router.
+#  When the CPU usage exceeds a certain threshold, an email notification is sent.
+#  The script is written in Bash and uses the RouterOS API to retrieve CPU usage data.
+#  The threshold for CPU usage can be customized by modifying the value in the script.
+#  To use this script, simply upload it to your MikroTik router and schedule it to run periodically using the scheduler feature.
+#  This script can help you stay informed about the health of your MikroTik router and take action before it becomes overloaded.
+
 :local cpuUsage [/system resource get cpu-load]
 
 :if ($cpuUsage > 20) do={
