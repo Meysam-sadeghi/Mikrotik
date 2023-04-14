@@ -1,0 +1,15 @@
+# This script will monitor the free disk space on your MikroTik router and send an email alert to the specified email address if the available space falls below 500MB.
+# You can modify the email address to your own address and adjust the threshold value as per your requirement.
+# To use this script, simply copy and paste it into the Terminal window of your MikroTik router and hit Enter.
+
+
+:local email "youremail@example.com"
+:local freeHDD [:tostr [/system resource get free-hdd-space]]
+:local freeHDDMB ([:tostr ($freeHDD / 1048576)] . "MB")
+
+if ($freeHDD < 500000000) do={
+  :local subject "Low Disk Space Warning"
+  :local body ("Disk space is running low on " . [/system identity get name] . " router. Free space: " . $freeHDDMB)
+
+  /tool e-mail send to=$email subject=$subject body=$body
+}
