@@ -1,0 +1,11 @@
+# This script is used to send email when a new user is created. Change the email according to your needs.
+# Also, to use this script, you need to specify the Mikrotik electronic tools correctly.
+
+
+:local recipient "example@example.com"
+:local subject "New User Created"
+:local message "A new user has been created on the MikroTik router."
+
+:if ([/system user find where created>=$startup-time] != "") do={
+  /tool e-mail send to=$recipient subject=$subject body=$message
+}
